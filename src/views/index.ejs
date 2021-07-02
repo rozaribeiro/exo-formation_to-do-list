@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Trello Simplon</title>
+    <link rel="stylesheet" href="/css/style.css"> 
+    <!-- todo caminho para elementos que se encontram em assets deve 
+    começar por "/" pois configuramos no router para ser assim -->
+</head>
+<body>
+
+  <section class="main_section">
+
+    <article class="affiche_contenu">
+
+      <h1> Liste des apprenantes: </h1>
+      
+      <ol>
+        <% trello_liste.forEach((trello) => { %>
+          <li><a href="<%= "/trello/" %><%= trello.id %>"><%= trello.nameTrello %></a></li>
+        <% }) %>
+      </ol>
+
+    </article>
+
+    <aside class="menu_edition">
+      
+      <div class="box">
+        <h1>nouveau apprenante</h1>
+        <form action="/addtrello" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" name="name" required />
+        <input type="submit" /> 
+        </form>
+      </div>
+
+      <div class="box">
+        <h1>nouvelle tâche</h1>
+          <form action="/addtache" method="POST" class="form">
+
+            <label class="label_droite" for="name">Tâche: </label>
+            <input class="input_droite" placeholder="Nouvelle Tâche" type="text" required name="name" /><br>
+            
+            <label class="label_droite" for="id_trello">Pour qui? </label>
+            <select class="input_droite" required name="id_trello">
+
+              <option value="" disabled selected hidden>Choisissez la victime, svp.</option>
+              
+              <% trello_liste.forEach((trello) => { %>
+                <option value="<%= trello.id %>"><%= trello.nameTrello %></option>
+              <% }) %>
+          
+            </select><br>
+
+            <label class="label_droite" for="description">Description: </label>
+            <textarea class="input_droite" placeholder="Description" name="description" cols="50" rows="10"></textarea><br>
+
+            <input class="input_droite" type="hidden" value="<%= new Date().toDateString()%>" name="date"/>
+
+            <input type="submit" />
+          </form>
+      </div>
+
+    </aside>
+  
+  </section>
+
+</body>
+</body>
+</html>

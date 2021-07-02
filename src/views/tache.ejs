@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Trello Perso</title>
+    <link rel="stylesheet" href="/css/style.css"> 
+    <!-- todo caminho para elementos que se encontram em assets deve 
+    começar por "/" pois configuramos no router para ser assim -->
+</head>
+<body>
+
+  <section class="main_section">
+    <article class="affiche_contenu">
+
+        <div class="box">
+
+            <h1>Modifier <%= dataTache[0].nameTache %></h1>
+
+           <form action="/edittache" method="POST">
+            
+            <label class="label_droite" for="description">Description: </label><br>
+            <textarea class="input_droite" name="description" cols="100" rows="10"><%= dataTache[0].description %></textarea><br>
+            
+            <label class="label_droite" for="fini">C'est fini? </label>
+
+            <input type="radio" name="fini" id="fini" value="0"> pas encore
+            <input type="radio" name="fini" id="fini" value="1"> bien sûr!
+
+            <input  type="hidden" name="id" value="<%= dataTache[0].id %>"/>
+
+            <input type="submit" />
+          </form> 
+
+          </div>
+    
+    </article>
+
+    <aside class="menu_edition">
+      
+        
+    </aside>
+  </section>
+
+</body>
+</html>

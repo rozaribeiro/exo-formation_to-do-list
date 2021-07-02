@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Trello Perso</title>
+    <link rel="stylesheet" href="/css/style.css"> 
+    <!-- todo caminho para elementos que se encontram em assets deve 
+    começar por "/" pois configuramos no router para ser assim -->
+</head>
+<body>
+
+  <section class="main_section">
+    <article class="affiche_contenu">
+
+  <ol>
+    </ol>
+     <h1>Tâches de <%= trelloName %></h1>
+
+        <% bdArray.forEach((item) => { %>
+        <h2><%= `${item.nameTache}` %></h2>
+        <p>Description: <%= `${item.description}` %></p>
+        <p>Date: <%= `${item.date}` %></p>
+        <p>Tâche fini?: <%= `${item.fini} ` %></p>
+
+
+        <p><a href="/findtache/<%= `${item.id}` %>"> >> Modifier tâche </a><a href="/deletetache/<%= `${item.id}` %>">>> Effacer Tâche</a></p>
+      <% }) %>
+    </ul>
+
+    </article>
+    <aside class="menu_edition">
+      
+        <div class="box">
+        <h1>nouvelle tâche pour <%= trelloName %></h1>
+          
+
+        <form action="/addtache" method="POST" class="form">
+
+          <label class="label_droite" for="name">Tâche: </label>
+          <input class="input_droite" placeholder="Nouvelle Tâche" type="text" required name="name" /><br>
+          
+          <label class="label_droite" for="description">Description: </label>
+          <textarea class="input_droite" placeholder= "Description de la tâche" name="description" cols="50" rows="10"></textarea><br>
+
+          <input class="input_droite" type="hidden" name="id_trello" value="<%= `${bdArray[0].id_trello}` %>"/>
+          <input class="input_droite" type="hidden" name="date" value=`<%= new Date().toDateString() %>` />
+
+          <input type="submit" />
+        </form>
+
+      </div>
+
+    </aside>
+  </section>
+
+</body>
+</html>
